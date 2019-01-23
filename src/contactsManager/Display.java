@@ -45,9 +45,9 @@ class Display {
        switch(searchChoice){
            case 1:
            // search by name
-               System.out.println("Search by Name:");
+               System.out.println("Search by Name");
                boolean contactExists = false;
-               String nameSearch = Manager.userInput.getString("Please enter a name:");
+               String nameSearch = Manager.userInput.getString("Please enter a name:\n");
                for(String contact: contacts ){
                    if (contact.substring(0, contact.indexOf("|")).contains(nameSearch)){
                        contactExists = true;
@@ -61,9 +61,9 @@ class Display {
 
            case 2:
            // search by number
-           System.out.println("Search by Number:");
+           System.out.println("Search by Number");
            contactExists = false;
-           nameSearch = Manager.userInput.getString("Please enter a number:");
+           nameSearch = Manager.userInput.getString("Please enter a number:\n");
            for(String contact : contacts ){
                if (contact.substring(contact.indexOf("|"), contact.length()-1).contains(nameSearch)){
                    contactExists = true;

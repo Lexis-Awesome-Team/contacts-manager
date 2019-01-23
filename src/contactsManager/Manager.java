@@ -22,9 +22,11 @@ public class Manager {
                 case 3:
                     // Search for a contact
                     Display.searchContacts();
+                    System.out.println();
                     break;
                 case 4:
                     // Delete a contact
+
                     break;
                 case 5:
                     // Exit the app
