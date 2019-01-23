@@ -12,8 +12,15 @@ class Editor {
     static void addContact(){
         String name = Manager.userInput.getString("Please enter name:");
         String number = Manager.userInput.getString("Please enter number:");
-        String contact = name.trim() + " | " + number.trim();
-        List<String> contactFile = Arrays.asList(contact);
+        number = number.replaceAll("[^0-9]", "");
+        System.out.println(number);
+        if (number.length() == 10) {
+            number = "(" + number.substring(0, 3) + ")" + number.substring(3, 6) + "-" + number.substring(6, 9) + number.charAt(9);
+        } else {
+            System.out.println("not a 10 digit number");
+        }
+            String contact = name.trim() + " | " + number.trim();
+            List<String> contactFile = Arrays.asList(contact);
 
         try{
             Files.write(Display.filePath, contactFile, StandardOpenOption.APPEND);
