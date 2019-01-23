@@ -10,6 +10,7 @@ class Display {
 
    static Path filePath = Paths.get("data","contacts.txt");
 
+
    static List<String>contacts;
 
    static {
@@ -40,8 +41,9 @@ class Display {
        System.out.println();
        for(String contact : contacts){
           String contactName = contact.substring(0, contact.indexOf("|"));
-          String contactNumber = contact.substring(contact.indexOf("|"), contact.length()-1) + contact.charAt(contact.length()-1);
-          System.out.format("|  %-18s %18s  | %n", contactName, contactNumber);
+          String contactNumber = contact.substring(contact.indexOf("|")+1, contact.length()-1) + contact.charAt(contact.length()-1);
+          Contacts person = new Contacts(contactName,contactNumber);
+          System.out.format("|  %-18s  | %n", person.getContact());
        }
        System.out.format("%34s%n", dashedLine);
    }
