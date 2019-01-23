@@ -33,17 +33,17 @@ class Display {
 
    static void viewContacts(){
        String nameTitle = "Name";
-       String phoneNumberTitle = "Phone Number  |";
-       String dashedLine = "----------------------------------------";
+       String phoneNumberTitle = "Phone Number   |";
+       String dashedLine = "-------------------------------------------";
        System.out.format("%n%34s%n", dashedLine);
-       System.out.format("%-22s | %10s %n%34s", nameTitle,  phoneNumberTitle, dashedLine);
+       System.out.format("|  %-21s | %11s %n%34s", nameTitle,  phoneNumberTitle, dashedLine);
        System.out.println();
        for(String contact : contacts){
           String contactName = contact.substring(0, contact.indexOf("|"));
-          String contactNumber = contact.substring(contact.indexOf("|"), contact.length()-1);
-           System.out.format("%-18s %18s  | %n", contactName, contactNumber);
+          String contactNumber = contact.substring(contact.indexOf("|"), contact.length()-1) + contact.charAt(contact.length()-1);
+          System.out.format("|  %-18s %18s  | %n", contactName, contactNumber);
        }
-       System.out.format("%34s", dashedLine);
+       System.out.format("%34s%n", dashedLine);
    }
 
 
