@@ -48,7 +48,7 @@ class Display {
                System.out.println("Search by Name");
                String nameSearch = Manager.userInput.getString("Please enter a name:\n");
                for(String contact: contacts ){
-                   if (contact.substring(0, contact.indexOf("|")).contains(nameSearch)){
+                   if (contact.substring(0, contact.toLowerCase().indexOf("|")).contains(nameSearch.toLowerCase().trim())){
                        contactExists = true;
                        System.out.println(contact);
                    }
@@ -63,7 +63,7 @@ class Display {
                contactExists = false;
                nameSearch = Manager.userInput.getString("Please enter a number:\n");
                for(String contact : contacts ){
-                   if (contact.substring(contact.indexOf("|"), contact.length()-1).contains(nameSearch)){
+                   if (contact.toLowerCase().substring(contact.indexOf("|"), contact.length()-1).contains(nameSearch.toLowerCase().trim())){
                        contactExists = true;
                        System.out.println(contact);
                    }

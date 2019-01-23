@@ -12,7 +12,7 @@ class Editor {
     static void addContact(){
         String name = Manager.userInput.getString("Please enter name:");
         String number = Manager.userInput.getString("Please enter number:");
-        String contact = name + " | " + number;
+        String contact = name.trim() + " | " + number.trim();
         List<String> contactFile = Arrays.asList(contact);
 
         try{
@@ -33,31 +33,40 @@ class Editor {
     static void deleteContact(){
         //  display contacts so user can choose one to delete
         //  contcts is a copy of contacts array
-        List<String> contcts = Display.contacts;
+        List<String> contcts = new ArrayList<>();
         System.out.println("All Contacts:");
         Display.viewContacts();
-        String nameToDelete = Manager.userInput.getString("Enter full name of contact you want to delete:");
+        String nameToDelete = Manager.userInput.getString("Enter full name of contact you want to delete:\n");
         String contactToDelete = "";
         boolean confirm = false;
         boolean contactExists = false;
-        for (String contact:contcts) {
-            if(contact.contains(nameToDelete)){
+        for (String contact:Display.contacts) {
+            if(contact.toLowerCase().contains(nameToDelete.toLowerCase().trim())){
                 contactExists = true;
                 System.out.println("You entered:\n" + contact);
-                confirm = Manager.userInput.yesNo("Are you sure you want to delete this contact? [y/n]");
+                confirm = Manager.userInput.yesNo("Are you sure you want to delete this contact? [y/n]\n");
                 contactToDelete = contact;
             }
         }
         if (confirm) {
-            contcts.remove(contactToDelete);
-        }
-        else {
-            System.out.println("Nothing was deleted.");
-        }
+            for(String contact: Display.contacts) {
+                if(contact.equalsIgnoreCase(contactToDelete.trim())){
+                    continue;
+                } else {
+                    contcts.add(contact);
+                }
+            }
+            System.out.println("Contact Deleted.");
         try {
             Files.write(Display.filePath,contcts);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+
+
+        }
+        else {
+            System.out.println("Nothing was deleted.");
         }
         try {
             Display.contacts = Files.readAllLines(Display.filePath);
