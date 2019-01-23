@@ -14,11 +14,12 @@ class Editor {
         String number = Manager.userInput.getString("Please enter number:");
         number = number.replaceAll("[^0-9]", "");
         System.out.println(number);
-        if (number.length() == 10) {
-            number = "(" + number.substring(0, 3) + ")" + number.substring(3, 6) + "-" + number.substring(6, 9) + number.charAt(9);
-        } else {
-            System.out.println("not a 10 digit number");
-        }
+        if (number.length() == 10 || number.length() == 7) {
+            if (number.length()==10) {
+                number = "(" + number.substring(0, 3) + ")" + number.substring(3, 6) + "-" + number.substring(6, 9) + number.charAt(9);
+            } else {
+                number = number.substring(0, 3) + "-" + number.substring(3, 6) + number.charAt(6);
+            }
             String contact = name.trim() + " | " + number.trim();
             List<String> contactFile = Arrays.asList(contact);
 
@@ -34,7 +35,10 @@ class Editor {
         }
         System.out.println("Contact added: \n" + contact);
         System.out.println();
-    }
+    } else {
+            System.out.println("Please enter a valid 7 or 10 digit number.");
+        }
+     }
 
 
     static void deleteContact(){
