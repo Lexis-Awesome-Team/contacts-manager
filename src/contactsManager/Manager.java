@@ -21,12 +21,13 @@ public class Manager {
                     break;
                 case 3:
                     // Search for a contact
-                    Display.searchContacts();
+                    int userChoice = userInput.getInt("\"How would you like to search?\"\n 1. Name\n 2. Number\n", 1, 2);
+                    Display.searchContacts(userChoice, "");
                     System.out.println();
                     break;
                 case 4:
                     // Delete a contact
-
+                    Editor.deleteContact();
                     break;
                 case 5:
                     // Exit the app

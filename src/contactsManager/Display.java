@@ -40,13 +40,12 @@ class Display {
    }
 
 
-   static void searchContacts(){
-       int searchChoice = Manager.userInput.getInt("How would you like to search?\n 1. Name\n 2. Number\n");
-       switch(searchChoice){
+   static void searchContacts(int choice, String name){
+       boolean contactExists = false;
+       switch(choice){
            case 1:
            // search by name
                System.out.println("Search by Name");
-               boolean contactExists = false;
                String nameSearch = Manager.userInput.getString("Please enter a name:\n");
                for(String contact: contacts ){
                    if (contact.substring(0, contact.indexOf("|")).contains(nameSearch)){
@@ -58,22 +57,25 @@ class Display {
                    System.out.println("No contact matching that name;");
                }
                break;
-
            case 2:
-           // search by number
-           System.out.println("Search by Number");
-           contactExists = false;
-           nameSearch = Manager.userInput.getString("Please enter a number:\n");
-           for(String contact : contacts ){
-               if (contact.substring(contact.indexOf("|"), contact.length()-1).contains(nameSearch)){
-                   contactExists = true;
-                   System.out.println(contact);
+               // search by number
+               System.out.println("Search by Number");
+               contactExists = false;
+               nameSearch = Manager.userInput.getString("Please enter a number:\n");
+               for(String contact : contacts ){
+                   if (contact.substring(contact.indexOf("|"), contact.length()-1).contains(nameSearch)){
+                       contactExists = true;
+                       System.out.println(contact);
+                   }
                }
-           }
-           if(!contactExists) {
-               System.out.println("No contact matching that number;");
-           }
-           break;
+               if(!contactExists) {
+                   System.out.println("No contact matching that number;");
+               }
+               break;
+           case 3:
+               //Used only by delete method
+
+               break;
        }
 
    }

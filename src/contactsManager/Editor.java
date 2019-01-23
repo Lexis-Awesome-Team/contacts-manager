@@ -32,21 +32,41 @@ class Editor {
 
     static void deleteContact(){
         //  display contacts so user can choose one to delete
+        //  contcts is a copy of contacts array
+        List<String> contcts = Display.contacts;
         System.out.println("All Contacts:");
         Display.viewContacts();
         String nameToDelete = Manager.userInput.getString("Enter full name of contact you want to delete:");
-        System.out.println("You Entered: \n" + Display.contacts.contains(nameToDelete));
-    boolean confirm = Manager.userInput.yesNo("Are you sure you want to delete this contact? [y/n]");
-
+        String contactToDelete = "";
+        boolean confirm = false;
+        boolean contactExists = false;
+        for (String contact:contcts) {
+            if(contact.contains(nameToDelete)){
+                contactExists = true;
+                System.out.println("You entered:\n" + contact);
+                confirm = Manager.userInput.yesNo("Are you sure you want to delete this contact? [y/n]");
+                contactToDelete = contact;
+            }
+        }
         if (confirm) {
-//            try {
-//
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-            System.out.println("Contact deleted.");
-        } else {
+            contcts.remove(contactToDelete);
+        }
+        else {
             System.out.println("Nothing was deleted.");
+        }
+        try {
+            Files.write(Display.filePath,contcts);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            Display.contacts = Files.readAllLines(Display.filePath);
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+
+        if(!contactExists){
+            System.out.println("Contact does not exist.");
         }
 
     }
