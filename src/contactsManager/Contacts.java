@@ -13,8 +13,12 @@ public class Contacts {
     }
 
 //    getter
-    public String getContact() {
-        return name + " | " + number;
+    public String getName() {
+        return name;
+    }
+
+    public String getNumber() {
+        return number;
     }
 
 
