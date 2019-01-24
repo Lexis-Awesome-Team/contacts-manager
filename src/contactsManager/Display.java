@@ -10,6 +10,9 @@ class Display {
 
    static Path filePath = Paths.get("data","contacts.txt");
 
+//   ****************************************************************************
+//      TODO THURSDAY : add object array containing all contact objects HERE!!
+//   ****************************************************************************
 
    static List<String>contacts;
 
