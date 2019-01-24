@@ -1,8 +1,8 @@
-package contactsManager;
+    package contactsManager;
 
-import util.Input;
+    import util.Input;
 
-public class Manager {
+    public class Manager {
         static Input userInput = new Input();
     public static void main(String[] args) {
         boolean appRunning = true;
@@ -38,4 +38,4 @@ public class Manager {
         }
 
     }
-}
+    }
