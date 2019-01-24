@@ -6,6 +6,8 @@
         static Input userInput = new Input();
     public static void main(String[] args) {
         boolean appRunning = true;
+        Display.updateContacts();
+        Display.constructContacts();
         while(appRunning) {
             int menuChoice = userInput.getInt(Display.getDisplay(), 1, 5);
             switch (menuChoice){
@@ -22,7 +24,7 @@
                 case 3:
                     // Search for a contact
                     int userChoice = userInput.getInt("\"How would you like to search?\"\n 1. Name\n 2. Number\n", 1, 2);
-                    Display.searchContacts(userChoice, "");
+                    Display.searchContacts(userChoice);
                     System.out.println();
                     break;
                 case 4:

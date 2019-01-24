@@ -50,7 +50,7 @@ class Display {
     }
 
 
-    static void searchContacts(int choice, String name){
+    static void searchContacts(int choice){
        boolean contactExists = false;
        updateContacts();
        constructContacts();

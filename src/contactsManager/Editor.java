@@ -6,31 +6,45 @@
     import java.nio.file.StandardOpenOption;
     import java.util.ArrayList;
     import java.util.Arrays;
+    import java.util.Dictionary;
     import java.util.List;
 
-class Editor {
+
+    class Editor {
     static void addContact(){
-        String name = Manager.userInput.getString("Please enter name:");
-        String number = Manager.userInput.getString("Please enter number:");
+        String name = "";
+        String number = "";
+        name = Manager.userInput.getString("Please enter name:");
+        number = Manager.userInput.getString("Please enter number:");
         number = number.replaceAll("[^0-9]", "");
-        System.out.println(number);
         if (number.length() == 10 || number.length() == 7) {
             if (number.length()==10) {
                 number = "(" + number.substring(0, 3) + ")" + number.substring(3, 6) + "-" + number.substring(6, 9) + number.charAt(9);
             } else {
                 number = number.substring(0, 3) + "-" + number.substring(3, 6) + number.charAt(6);
             }
-            String contact = name.trim() + " | " + number.trim();
-            List<String> contactFile = Arrays.asList(contact);
+        if (verifyContact(name)){
+            if(Manager.userInput.yesNo("Contact already exists would you like to overwrite it? [y/n]")){
+                for(String contact: Display.contacts){
+                    if (contact.toLowerCase().contains(name.toLowerCase())){
+                        Display.contacts.set(Display.contacts.indexOf(contact), name + " | " + number);
+                    }
+                }
+            }
 
+        }
+        else {
+            String contact = name.trim() + " | " + number.trim();
+            Display.contacts.add(contact);
+            System.out.println("Contact added: \n" + contact);
+        }
             try{
-                Files.write(Display.filePath, contactFile, StandardOpenOption.APPEND);
+                Files.write(Display.filePath, Display.contacts);
             }catch (IOException e){
                 e.printStackTrace();
             }
             Display.updateContacts();
             Display.constructContacts();
-            System.out.println("Contact added: \n" + contact);
             System.out.println();
         } else {
                 System.out.println("Please enter a valid 7 or 10 digit number.");
@@ -47,7 +61,7 @@ class Editor {
         String contactToDelete = "";
         boolean confirm = false;
         boolean contactExists = false;
-        for (Contacts contact:Display.people) {
+        for (Contacts contact: Display.people) {
             if(contact.getName().toLowerCase().contains(nameToDelete.toLowerCase().trim())){
                 contactExists = true;
                 System.out.println("You entered:\n" + contact.getName() + " | " + contact.getNumber());
@@ -82,6 +96,16 @@ class Editor {
                 System.out.println("Contact does not exist.");
             }
 
+    }
+
+    static boolean verifyContact(String name){
+        boolean contactExists = false;
+        for(Contacts contact : Display.people){
+            if (contact.getName().equalsIgnoreCase(name.trim())){
+                contactExists = true;
+            }
+        }
+        return contactExists;
     }
 
 
