@@ -44,7 +44,12 @@ class Display {
         System.out.format("|  %-19s | %11s %n%34s", nameTitle,  phoneNumberTitle, dashedLine);
         System.out.println();
         for(Contacts contact : people){
-          System.out.format("|  %-18s  | %-15s  |%n", contact.getName(), contact.getNumber());
+            if(contact.getName().length() > 18) {
+                System.out.format("|  %-18s  | %-15s  |%n", contact.getName().substring(0,18), contact.getNumber());
+            }
+             else{
+                 System.out.format("|  %-18s  | %-15s  |%n", contact.getName(), contact.getNumber());
+             }
         }
         System.out.format("%34s%n", dashedLine);
     }
